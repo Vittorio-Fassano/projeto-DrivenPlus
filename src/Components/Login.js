@@ -1,18 +1,48 @@
 import { Link } from 'react-router-dom';
 import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
+import { useContext } from "react";
+import UserContext from '../Contexts/UserContext';
 
 import axios from "axios";
 import styled from 'styled-components';
-
 import Logo from '../Assets/images/Logo.png'
+
 function Login() {
+    const {setToken} = useContext(UserContext)
+    const navigate = useNavigate();
+
+    const [infosLogin, setInfosLogin] = useState({emailLogin: "", passwordLogin: ""})
+
+    const objLogin = {
+        email: infosLogin.emailLogin,
+        password: infosLogin.passwordLogin
+    }
+
+    function LoginUser (e) {
+        e.preventDefault()
+
+        const URLLOGIN =  "https://mock-api.driven.com.br/api/v4/driven-plus/auth/login"
+        const promise = axios.post(URLLOGIN, objLogin);
+        
+        promise.then(response => {
+            const {data} = response;
+            setToken(data.token)
+            navigate("/home");
+        })
+        promise.catch(err => {
+            alert('Usuário inexiste ou usuário e senha incorretos!')
+        })
+    }
+
     return (
         <ContainerLogin>
             <img src={Logo} alt="logo" />
-            <input type="email" placeholder='E-mail'></input>
-            <input type="password" placeholder='Senha'></input> 
-            <button type='submit'>ENTRAR</button>
+            <form onSubmit={LoginUser}>
+                <input type="email" placeholder='E-mail' value={infosLogin.emailLogin} onChange={(e) => setInfosLogin({...infosLogin, emailLogin: e.target.value})} ></input>
+                <input type="password" placeholder='Senha' value={infosLogin.passwordLogin} onChange={(e) => setInfosLogin({...infosLogin, passwordLogin: e.target.value})}></input> 
+                <button type='submit'>ENTRAR</button>
+            </form>
             <Link to='/sign-up'> <p>Não tem uma conta? Cadastre-se!</p> </Link>
         </ContainerLogin>
     );
@@ -28,9 +58,15 @@ const ContainerLogin = styled.div `
     height: 100vh;
     font-family: 'Roboto', sans-serif;
 
+    form {
+        justify-content: center;
+        align-items: center;
+        margin-left: 38px;
+    }
+
     img {
-        margin-top: 134px;
-        margin-bottom: 100px;
+        margin-top: 125px;
+        margin-bottom: 80px;
     }
 
     input {

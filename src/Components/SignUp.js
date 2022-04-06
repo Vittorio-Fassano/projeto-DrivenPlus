@@ -6,19 +6,47 @@ import axios from "axios";
 import styled from 'styled-components';
 
 function SignUp() {
+    const [infosRegister, setInfoRegister] = useState({ email: "", name: "", cpf: "", password: "" });
+    const obj = {
+        email: infosRegister.email,
+        name: infosRegister.name,
+        cpf: infosRegister.cpf,
+        password: infosRegister.password
+    }
+    const navigate = useNavigate();
+
+    function RegisterNewUser(e) {
+        e.preventDefault()
+        
+        const POSTURLREGISTER = "https://mock-api.driven.com.br/api/v4/driven-plus/auth/sign-up";
+        const promise = axios.post(POSTURLREGISTER, obj);
+
+        promise.then(response => {
+            const { data } = response;
+            navigate("/subscription")
+        })
+        promise.catch(err => {
+            alert("Erro ao registrar um novo usuário!")
+        })
+    }
+
     return (
         <ContainerSignUp>
-            <input type="name" placeholder='Nome'></input>
-            <input type="number" placeholder='CPF'></input>
-            <input type="email" placeholder='E-mail'></input>
-            <input type="password" placeholder='Senha'></input>
-            <button type='submit'>ENTRAR</button>
+            <ContainerInputsSU>
+                <form onSubmit={RegisterNewUser}>
+                    <input type="name" placeholder='Nome' value={infosRegister.name} onChange={(e) => setInfoRegister({...infosRegister, name: e.target.value})}></input>
+                    <input type="" placeholder='CPF' value={infosRegister.cpf} onChange={(e) => setInfoRegister({...infosRegister, cpf: e.target.value})}></input>
+                    <input type="email" placeholder='E-mail' value={infosRegister.email} onChange={(e) => setInfoRegister({...infosRegister, email: e.target.value})}></input>
+                    <input type="password" placeholder='Senha' value={infosRegister.password} onChange={(e) => setInfoRegister({...infosRegister, password: e.target.value})}></input>
+                    <button type='submit'>ENTRAR</button>
+                </form>
+            </ContainerInputsSU>
             <Link to='/'> <p>Já possui uma conta? Cadastre-se!</p> </Link>
         </ContainerSignUp>
     );
 }
 
-const ContainerSignUp = styled.div `
+const ContainerSignUp = styled.div`
     margin: auto auto;
     display: flex;
     flex-direction: column;
@@ -27,6 +55,11 @@ const ContainerSignUp = styled.div `
     width: 100vw;
     height: 100vh;
     font-family: 'Roboto', sans-serif;
+
+    form {
+        justify-content: center;
+        align-items: center;
+    }
 
     input {
         width: 299px;
@@ -72,4 +105,10 @@ const ContainerSignUp = styled.div `
         margin-bottom: 150px;
     }
 `;
+
+const ContainerInputsSU = styled.div`
+    margin-top: 119px;
+    margin-left: 38px;
+`;
+
 export default SignUp;
