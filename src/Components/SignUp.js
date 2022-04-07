@@ -23,7 +23,7 @@ function SignUp() {
 
         promise.then(response => {
             const { data } = response;
-            navigate("/subscription")
+            navigate("/")
         })
         promise.catch(err => {
             alert("Erro ao registrar um novo usuário!")
@@ -38,7 +38,7 @@ function SignUp() {
                     <input type="" placeholder='CPF' value={infosRegister.cpf} onChange={(e) => setInfoRegister({...infosRegister, cpf: e.target.value})}></input>
                     <input type="email" placeholder='E-mail' value={infosRegister.email} onChange={(e) => setInfoRegister({...infosRegister, email: e.target.value})}></input>
                     <input type="password" placeholder='Senha' value={infosRegister.password} onChange={(e) => setInfoRegister({...infosRegister, password: e.target.value})}></input>
-                    <button type='submit'>ENTRAR</button>
+                    <button type='submit'>CADASTRAR</button>
                 </form>
             </ContainerInputsSU>
             <Link to='/'> <p>Já possui uma conta? Cadastre-se!</p> </Link>

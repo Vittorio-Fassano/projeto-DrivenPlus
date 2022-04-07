@@ -6,21 +6,20 @@ import { useNavigate } from 'react-router-dom';
 import axios from "axios";
 import styled from 'styled-components';
 
-import  MiniIconVr from '../Assets/images/MiniIconVr.png';
+import  MiniIconAm from '../Assets/images/MiniIconAm.png';
 
 
-function Home() {
+function HomeGold() {
     return (
         <ContainerHome>
            <ContainerTopo>
-            <img src={MiniIconVr} alt="MiniIconVr" />
+            <img src={MiniIconAm} alt="MiniIconAm" />
             <ion-icon name="person-circle-outline"></ion-icon>
            </ContainerTopo>
            <h1>Olá, Fulano</h1>
            <button type='submit'>Solicitar brindes</button>
            <button type='submit'>Materiais bônus de web</button>
            <button type='submit'>Aulas bônus de tech</button>
-           <button type='submit'>Mentorias personalizadas</button>
            
            <ContainerButtonFixed>
            <button type='submit'>Mudar plano</button>
@@ -94,4 +93,4 @@ const ContainerTopo = styled.div `
     }
 
 `;
-export default Home;
+export default HomeGold;

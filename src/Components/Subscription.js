@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom';
 import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
+import { useContext } from "react";
+import UserContext from '../Contexts/UserContext';
 
 
 import axios from "axios";
@@ -13,28 +15,46 @@ import IconeSubsVr from '../Assets/images/IconeSubsVr.png';
 
 
 function Subscription() {
+    const { token } = useContext(UserContext)
+    const navigate = useNavigate();
+
+    const obj = {
+
+    }
+
+
+
+
+
+
     return (
         <ContainerSubscription>
             <h1>Escolha seu Plano</h1>
             <ContainerPlanoBranco>
-                <img src={IconeSubsBr} alt="IconeSubsBr"/>
-                <p>R$ 39,99</p>
+                <button>
+                    <img src={IconeSubsBr} alt="IconeSubsBr" />
+                    <p>R$ 39,99</p>
+                </button>
             </ContainerPlanoBranco>
-
+        
             <ContainerPlanoAmarelo>
-                <img src={IconeSubsAm} alt="IconeSubsAm" />
-                <p>R$ 69,99</p>
+                <button>
+                    <img src={IconeSubsAm} alt="IconeSubsAm" />
+                    <p>R$ 69,99</p>
+                </button>
             </ContainerPlanoAmarelo>
 
             <ContainerPlanoVerde>
-                <img src={IconeSubsVr} alt="IconeSubsVr" />
-                <p>R$ 99,99</p>
+                <button>
+                    <img src={IconeSubsVr} alt="IconeSubsVr" />
+                    <p>R$ 99,99</p>
+                </button>
             </ContainerPlanoVerde>
         </ContainerSubscription>
     );
 }
 
-const ContainerSubscription = styled.div `
+const ContainerSubscription = styled.div`
     margin: auto auto;
     display: flex;
     flex-direction: column;
@@ -55,16 +75,7 @@ const ContainerSubscription = styled.div `
     }
 `;
 
-const ContainerPlanoBranco = styled.div `
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 290px;
-    height: 180px;
-    border: 3px solid #7E7E7E;
-    border-radius: 10px;
-    margin-bottom: 10px;
-
+const ContainerPlanoBranco = styled.div`
     p {
         font-size: 24px;
         font-family: 'Roboto', sans-serif;
@@ -79,19 +90,22 @@ const ContainerPlanoBranco = styled.div `
 
     img {
         margin-left: 3px;
+    }
+
+    button {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 290px;
+        height: 180px;
+        border: 3px solid #7E7E7E;
+        border-radius: 10px;
+        margin-bottom: 10px;
+        background-color: #0E0E13;
     }
 `;
 
-const ContainerPlanoAmarelo = styled.div `
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 290px;
-    height: 180px;
-    border: 3px solid #7E7E7E;
-    border-radius: 10px;
-    margin-bottom: 10px;
-
+const ContainerPlanoAmarelo = styled.div`
     p {
         font-size: 24px;
         font-family: 'Roboto', sans-serif;
@@ -106,19 +120,22 @@ const ContainerPlanoAmarelo = styled.div `
 
     img {
         margin-left: 3px;
+    }
+
+    button {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 290px;
+        height: 180px;
+        border: 3px solid #7E7E7E;
+        border-radius: 10px;
+        margin-bottom: 10px;
+        background-color: #0E0E13;
     }
 `;
 
-const ContainerPlanoVerde = styled.div `
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 290px;
-    height: 180px;
-    border: 3px solid #7E7E7E;
-    border-radius: 10px;
-    margin-bottom: 10px;
-
+const ContainerPlanoVerde = styled.div`
     p {
         font-size: 24px;
         font-family: 'Roboto', sans-serif;
@@ -133,6 +150,18 @@ const ContainerPlanoVerde = styled.div `
 
     img {
         margin-left: 3px;
+    }
+
+    button {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 290px;
+        height: 180px;
+        border: 3px solid #7E7E7E;
+        border-radius: 10px;
+        margin-bottom: 10px;
+        background-color: #0E0E13;
     }
 `;
 

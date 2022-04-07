@@ -27,8 +27,9 @@ function Login() {
         
         promise.then(response => {
             const {data} = response;
+            console.log("teste", data)
             setToken(data.token)
-            navigate("/home");
+            navigate("/home(usuarioplus)");
         })
         promise.catch(err => {
             alert('Usuário inexiste ou usuário e senha incorretos!')
