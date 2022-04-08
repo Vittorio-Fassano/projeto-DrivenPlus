@@ -155,9 +155,19 @@ const ContainerFundoOpaco = styled.div`
 const ContainerBotoes = styled.div`
     display: flex;
     justify-content: space-between;
-    width: 120px;
+    width: 180px;
     margin-left: 5px;
     margin-right: 5px;
+    margin-left: 35px;
+
+    .botaoCinza {
+        width: 95px;
+        height: 52px;
+        margin-right: 14px;
+        background-color: #CECECE;
+        color: #FFFFFF;
+        border: none;
+    }   
 
     .botaoRosa {
         width: 95px;
@@ -165,16 +175,8 @@ const ContainerBotoes = styled.div`
         background-color: #FF4791;
         color: #FFFFFF;
         border-radius: 8px;
+        border: none;
     }
-
-    .botaocinza {
-        width: 95px;
-        height: 52px;
-        margin-right: 14px;
-        background-color: #CECECE;
-        color: #FFFFFF;
-    }   
-
 `;
 
 const ContainerModal = styled.div`
