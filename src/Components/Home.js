@@ -1,29 +1,53 @@
 import { Link } from 'react-router-dom';
 import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
+import UserContext from '../Contexts/UserContext';
+import { useContext } from "react";
+
 
 
 import axios from "axios";
 import styled from 'styled-components';
 
-import  MiniIconAm from '../Assets/images/MiniIconAm.png';
+import  MiniIconBr from '../Assets/images/MiniIconBr.png';
 
 
-function HomeGold() {
+function Home() {
+    const navigate = useNavigate()
+    const { dadosPlano, token, nomeUsuario} = useContext(UserContext)
+    console.log("telahome", dadosPlano)
+
+
+    function cancelarPlano() {
+        const URL = "https://mock-api.driven.com.br/api/v4/driven-plus/subscriptions";
+
+        const config = {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }
+
+        const promise = axios.delete(URL, config) ;
+        promise.then(response => {
+            console.log("planocacelado")
+            navigate("/subscription")
+        })
+        promise.catch(err => {
+            alert("Erro ao cancelar plano!")
+        })
+    }
+
     return (
         <ContainerHome>
            <ContainerTopo>
-            <img src={MiniIconAm} alt="MiniIconAm" />
+            <img src={dadosPlano.membership.image} alt="imagemplano" />
             <ion-icon name="person-circle-outline"></ion-icon>
            </ContainerTopo>
-           <h1>Olá, Fulano</h1>
-           <button type='submit'>Solicitar brindes</button>
-           <button type='submit'>Materiais bônus de web</button>
-           <button type='submit'>Aulas bônus de tech</button>
-           
+           <h1>Olá, {nomeUsuario}</h1>
+           {dadosPlano.membership.perks.map(perk => <a href={perk.link}><button type='submit'>{perk.title}</button></a>)}
            <ContainerButtonFixed>
-           <button type='submit'>Mudar plano</button>
-           <button className = "cancelar" type='submit'>Cancelar plano</button>
+           <button type='submit' onClick={() => navigate("/subscription")} >Mudar plano</button>
+           <button className = "cancelarplano" type='submit' onClick={() => cancelarPlano()} >Cancelar plano</button>
            </ContainerButtonFixed>
         </ContainerHome>
     );
@@ -35,6 +59,10 @@ const ContainerHome = styled.div `
     width: 100vw;
     height: 100vh;
     font-family: 'Roboto', sans-serif;
+
+    a {
+        margin-left: 40px;
+    }
 
     h1 {
         font-size: 24px;
@@ -71,7 +99,7 @@ const ContainerButtonFixed = styled.div `
     margin-left: 38px;
     margin-bottom: 10px;
 
-    .cancelar {
+    .cancelarplano {
         background-color: #FF4747;
     }
 `;
@@ -93,4 +121,4 @@ const ContainerTopo = styled.div `
     }
 
 `;
-export default HomeGold;
+export default Home;

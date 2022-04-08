@@ -9,7 +9,7 @@ import styled from 'styled-components';
 import Logo from '../Assets/images/Logo.png'
 
 function Login() {
-    const {setToken} = useContext(UserContext)
+    const { setToken, setDadosPlano, setNomeUsuario } = useContext(UserContext)
     const navigate = useNavigate();
 
     const [infosLogin, setInfosLogin] = useState({emailLogin: "", passwordLogin: ""})
@@ -29,7 +29,14 @@ function Login() {
             const {data} = response;
             console.log("teste", data)
             setToken(data.token)
-            navigate("/home(usuarioplus)");
+            console.log(data.token)
+            if(data.membership === null) {
+                navigate("/subscription")
+            } else{
+                setNomeUsuario(data.name)
+                setDadosPlano(data)
+                navigate("/home");
+            }
         })
         promise.catch(err => {
             alert('Usuário inexiste ou usuário e senha incorretos!')
